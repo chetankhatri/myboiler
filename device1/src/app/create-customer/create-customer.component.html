@@ -393,8 +393,8 @@
                 <th>Notes</th>
               </tr>
             </thead>
-           <tbody *ngFor=" let customer of customers">
-           <tr>
+           <tbody>
+           <tr *ngFor=" let customer of customers">
         <td>{{customer.title}} {{customer.firstName}} {{customer.lastName}} </td>
         <td>{{customer.companyName}}</td>
         <td>{{customer.buildingNumber}}, {{customer.streetAddress}}, {{customer.city}}, {{customer.region}}, {{customer.postalCode}}</td>

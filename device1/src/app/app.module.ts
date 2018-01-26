@@ -3,24 +3,25 @@ import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
+import { CustomerService } from './customer.service';
 
 
 
 import { AppComponent } from './app.component';
-import { CreateComponent } from './create/create.component';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateComponent
+    CreateCustomerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

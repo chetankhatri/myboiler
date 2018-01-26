@@ -10,30 +10,28 @@ import {
     RequestOptions
 } from '@angular/http';
 
+import { CustomerService } from '../customer.service';
+
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-create-customer',
+  templateUrl: './create-customer.component.html',
+  styleUrls: ['./create-customer.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CreateCustomerComponent implements OnInit {
 
     public customers:any[]; 
-    constructor(private http: Http) {
-     this.http.get('http://localhost:8080/api/v1/customer/all')
-      .subscribe( data => {
-          this.customers=data.json();
-          console.log(data.json());
-   });
+    constructor(private http: Http, private customerService: CustomerService) { }
+
+    ngOnInit() {
+        this.customerService.getCustomers()
+            .subscribe( data => {
+                this.customers=data.json();
+                console.log(data.json());
+            });
     }
 
-    ngOnInit() {}
     registerCustomer(f) {
-        let cpHeaders = new Headers({
-            'Content-Type': 'application/json'
-        });
-        let options = new RequestOptions({
-            headers: cpHeaders
-        });
+        
         let customer = {
             title: f.value.title,
             firstName: f.value.firstName,
@@ -50,12 +48,12 @@ export class CreateComponent implements OnInit {
             secondaryEmail: f.value.secondaryEmail,
             notes: f.value.notes
         };
-        this.http.post('http://localhost:8080/api/v1/customer/register', JSON.stringify(customer), options)
-            .subscribe(response => {
 
+        this.customerService.saveCustomer(customer)
+            .subscribe(response => {
                 console.log(response.json());
             });
-            f.reset();
+        f.reset();
     }
 
 }
