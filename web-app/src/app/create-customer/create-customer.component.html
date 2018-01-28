@@ -87,7 +87,7 @@
             <h3 class="panel-title">Customer Onboarding</h3>
           </div>
           <div class="panel-body">
-            <form  #f="ngForm" (ngSubmit)="registerCustomer(f)" class="form-horizontal" id="customerForm">
+            <form  #customerForm="ngForm" (ngSubmit)="registerCustomer(customerForm)" class="form-horizontal" id="customerForm">
               <fieldset>
 
                 <div class="row">
@@ -191,65 +191,63 @@
             <h3 class="panel-title">Property</h3>
           </div>
           <div class="panel-body">
-            <form class="form-horizontal" id="propertyForm">
+          <form  #propertyForm="ngForm" (ngSubmit)="registerProperty(propertyForm)" class="form-horizontal" id="propertyForm">
               <fieldset>
 
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="title">Customer name</label>
                     <select class="form-control" id="customername">
-                      <option>Denial Stephen</option>
-                      <option>David Malan</option>
-                      <option>Alexa Bennett</option>
+                      <option *ngFor="let customer of customers">{{customer.title}}. {{customer.firstName}} {{customer.lastName}}</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="firstname">Building / House number</label>
-                    <input type="text" class="form-control" id="housenumber" />
+                    <input type="text" class="form-control" id="houseNumber" name="houseNumber" ngModel #houseNumber="ngModel" />
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="lastname">Street address</label>
-                    <input type="text" class="form-control" id="streetaddress" />
+                    <input type="text" class="form-control" id="streetAddress" name="streetAddress" ngModel #streetAddress="ngModel"/>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="companyname">City</label>
-                    <input type="text" class="form-control" id="city" />
+                    <input type="text" class="form-control" id="city" name="city" ngModel #city="ngModel"/>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="buildingnumber">Region</label>
-                    <input type="text" class="form-control" id="region" />
+                    <input type="text" class="form-control" id="region" name="region" ngModel #region="ngModel"/>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="streetAddress">Postal code</label>
-                    <input type="text" class="form-control" id="postalcode" />
+                    <input type="text" class="form-control" id="postalCode" name="postalCode" ngModel #postalCode="ngModel"/>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="city">Country code</label>
-                    <input type="text" class="form-control" id="countrycode" />
+                    <input type="text" class="form-control" id="countryCode" name="countryCode" ngModel #countryCode="ngModel" />
                   </div>
                   <div class="form-group col-md-6">
                     <label for="region">Occupant's name</label>
-                    <input type="text" class="form-control" id="occupantname" />
+                    <input type="text" class="form-control" id="occupantName" name="occupantName" ngModel #occupantName="ngModel"/>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="postalcode">Occupant's phone</label>
-                    <input class="form-control" type="tel" id="occupantphone">
+                    <input class="form-control" type="tel" id="occupantPhone" name="occupantPhone" ngModel #occupantPhone="ngModel">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="landline">Occupant's email</label>
-                     <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp">
+                     <input type="email" class="form-control" id="emailAddress" name="emailAddress" ngModel #emailAddress="ngModel" aria-describedby="emailHelp">
                   </div>
                 </div>
 
@@ -258,7 +256,7 @@
                   
                   <div class="form-group col-md-6">
                     <label for="streetAddress">Notes</label>
-                    <textarea class="form-control" id="notes" rows="3"></textarea>
+                    <textarea class="form-control" id="notes" name="notes" rows="3" ngModel #notes="ngModel"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
@@ -290,7 +288,7 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="firstname">Building / House number</label>
-                    <select class="form-control" id="customername">
+                    <select class="form-control" id="buildingNumber">
                       <option>1, London</option>
                       <option>2, manchester</option>
                       <option>3, Birmingham</option>
@@ -394,7 +392,7 @@
               </tr>
             </thead>
            <tbody>
-           <tr *ngFor=" let customer of customers">
+        <tr *ngFor="let customer of customers">
         <td>{{customer.title}} {{customer.firstName}} {{customer.lastName}} </td>
         <td>{{customer.companyName}}</td>
         <td>{{customer.buildingNumber}}, {{customer.streetAddress}}, {{customer.city}}, {{customer.region}}, {{customer.postalCode}}</td>

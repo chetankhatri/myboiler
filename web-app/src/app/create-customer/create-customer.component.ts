@@ -19,43 +19,66 @@ import { CustomerService } from '../customer.service';
 })
 export class CreateCustomerComponent implements OnInit {
 
-    public customers:any[]; 
+    public customers: any[];
+    public property: any[];
     constructor(private http: Http, private customerService: CustomerService) { }
     getCustomers(){
         this.customerService.getCustomers()
         .subscribe( data => {
             this.customers=data.json();
-            console.log(data.json());
+            console.log(this.customers);
         });
     }
     ngOnInit() {
         this.getCustomers();
     }
 
-    registerCustomer(f) {
+    registerCustomer(customerForm) {
         
         let customer = {
-            title: f.value.title,
-            firstName: f.value.firstName,
-            lastName: f.value.lastName,
-            companyName: f.value.companyName,
-            buildingNumber: f.value.buildingNumber,
-            streetAddress: f.value.street,
-            city: f.value.city,
-            region: f.value.region,
-            postalCode: f.value.postalCode,
-            landLine: f.value.landLine,
-            mobile: f.value.mobile,
-            email: f.value.email,
-            secondaryEmail: f.value.secondaryEmail,
-            notes: f.value.notes
+            title: customerForm.value.title,
+            firstName: customerForm.value.firstName,
+            lastName: customerForm.value.lastName,
+            companyName: customerForm.value.companyName,
+            buildingNumber: customerForm.value.buildingNumber,
+            streetAddress: customerForm.value.street,
+            city: customerForm.value.city,
+            region: customerForm.value.region,
+            postalCode: customerForm.value.postalCode,
+            landLine: customerForm.value.landLine,
+            mobile: customerForm.value.mobile,
+            email: customerForm.value.email,
+            secondaryEmail: customerForm.value.secondaryEmail,
+            notes: customerForm.value.notes
         };
 
         this.customerService.saveCustomer(customer)
             .subscribe(response => {
                 this.getCustomers();
             });
-        f.reset();
+            customerForm.reset();
     }
 
+    registerProperty(propertyForm) {
+        let property = {
+            buildingNumber: propertyForm.value.buildingNumber,
+            city: propertyForm.value.city,
+            countryCode: propertyForm.value.countryCode,
+            customerId: propertyForm.value.customerId,
+            notes: propertyForm.value.notes,
+            occupantsEmail: propertyForm.value.occupantsEmail,
+            occupantsName: propertyForm.value.occupantsName,
+            occupantsPhone: propertyForm.value.occupantsPhone,
+            postalCode: propertyForm.value.postalCode,
+            propertyId: propertyForm.value.propertyId,
+            region: propertyForm.value.region,
+            streetAddress: propertyForm.value.streetAddress
+        };
+
+        this.customerService.saveProperty(property)
+            .subscribe(response => {
+                console.log("Inserted property")
+            });
+    }
+   
 }

@@ -26,4 +26,16 @@ export class CustomerService {
 
     return this.http.post('http://localhost:8080/api/v1/customer/register', JSON.stringify(customer), options);
   }
+
+  saveProperty(property) {
+    let cpHeaders = new Headers({
+      'Content-Type': 'application/json'
+    });
+    let options = new RequestOptions({
+        headers: cpHeaders
+    });
+    return this.http.post('http://localhost:8080/api/v1/property/register', JSON.stringify(property), options)
+  }
+
+  
 }
